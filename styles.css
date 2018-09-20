@@ -1,0 +1,7 @@
+body {
+  background-color: #7d92aa;
+}
+.newman {
+  cursor: pointer;
+  transition: ease .25s all;
+}

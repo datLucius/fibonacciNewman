@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hello, Jerry</title>
+  <link href="styles.css" type="text/css" rel="stylesheet" />
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let newmanWidth = 200,
+          newmanHeight = 200;
+      let newmanFib = 1;
+      function fibonacci(num){
+        let a = 1, b = 0, temp;
+
+        while (num >= 0){
+          temp = a;
+          a = a + b;
+          b = temp;
+          num--;
+        }
+
+        return b;
+      }
+      function helloJerry() {
+        console.log('Hello, Jerry');
+      }
+      function shrinkNewmans() {
+        const newmans = document.getElementsByClassName('newman');
+        if (newmans.length > 2) {
+          newmanWidth /= 1.2;
+          newmanHeight /= 1.2;
+          for (let i = 0; i < newmans.length; i++) {
+            newmans[i].setAttribute("width", newmanWidth);
+            newmans[i].setAttribute("height", newmanHeight);
+          }  
+        }
+      }
+      function newMan() {
+        const newmanImg = document.createElement("IMG");
+        Object.assign(newmanImg, {
+          className: "newman",
+          height: newmanHeight,
+          width: newmanWidth,
+          src: "newman.jpg",
+          onclick: function () {
+            propogateNewmans();
+            shrinkNewmans();
+            helloJerry();
+          }
+        });
+        document.body.append(newmanImg);
+      }
+      function propogateNewmans() {
+        const newmanCount = document.getElementsByClassName('newman').length;
+        let dif = fibonacci(newmanFib) - newmanCount;
+        for (let i = 0; i < dif; i++) {
+          newMan();
+        }
+        newmanFib++;
+      }
+      newMan();
+    });
+  </script>
+</head>
+<body>
+</body>
+</html>
